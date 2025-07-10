@@ -58,7 +58,7 @@ Our fusion architecture provides better steering prediction than LiDAR alone, si
 
 ***EveLidAngle*** can be downloaded [here](https://drive.google.com/file/d/1Bm8yLOnflttyp_G9F4kwzO-0AuzmZX0w/view?usp=drive_link).
 
-In total, our EveLidAngle dataset contains 7 sequences (27452 valid event-LiDAR-steering angle pairs), with 5 sequences (21576 valid event-LiDAR-steering angle pairs) for training and 2 other sequences (5876 valid event-LiDAR-steering angle pairs) for testing.
+In total, our EveLidAngle dataset contains 7 sequences / ROS bags (27452 valid event-LiDAR-steering angle pairs), with 5 sequences / ROS bags (21576 valid event-LiDAR-steering angle pairs) for training and 2 other sequences / ROS bags (5876 valid event-LiDAR-steering angle pairs) for testing.
 
 In each sequence:
 * `lidar_depth`: lidar scans with depth information;
