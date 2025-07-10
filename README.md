@@ -113,7 +113,7 @@ python3 train.py --train_data PATH_TO_DATASET/EveLidAngle/training --test_data P
 
 ## Testing
 
-For example:
+
 
 ```
 python3 metrics.py output.txt
