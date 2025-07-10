@@ -19,24 +19,18 @@ Dataset ***EveLidAngle*** can be found [here](#dataset).
 ## Contents
 
 1. [Abstract](#abstract)
-2. [News](#news)
-3. [Citation](#citation)
-4. [Dataset](#dataset)
-5. [Pre-trained Weights](#pre-trained-weights)
-6. [Installation](#installation)
+2. [Citation](#citation)
+3. [Dataset](#dataset)
+4. [Installation](#installation)
+5. [Training](#training)
+6. [Testing](#testing)
 7. [Acknowledgment](#acknowledgment)
-
 
 
 ## Abstract
 
 Autonomous racing has rapidly gained research attention. Traditionally, racing cars rely on 2D LiDAR as their primary visual system. In this work, we explore the integration of an event camera with the existing system to provide enhanced temporal information. Our goal is to fuse the 2D LiDAR data with event data in an end-to-end learning framework for steering prediction, which is crucial for autonomous racing. To the best of our knowledge, this is the first study addressing this challenging research topic. We start by creating a multisensor dataset specifically for steering prediction. Using this dataset, we establish a benchmark by evaluating various SOTA fusion methods. Our observations reveal that existing methods often incur substantial computational costs. To address this, we apply low-rank techniques to propose a novel, efficient, and effective fusion design. We introduce a new fusion learning policy to guide the fusion process, enhancing robustness against misalignment. 
 Our fusion architecture provides better steering prediction than LiDAR alone, significantly reducing the RMSE from 7.72 to 1.28. Compared to the second-best fusion method, our work represents only 11\% of the learnable parameters while achieving better accuracy.
-
-
-
-## News
-
 
 
 ## Citation
@@ -87,15 +81,6 @@ The format should be:
 
 
 
-## Pre-trained Weights
-
-
-
-
-
-
-
-
 ## Installation
 
 1. Clone
@@ -110,6 +95,24 @@ cd F1Tenth-Steering
 ```
 conda create -n ENV_NAME
 conda activate ENV_NAME
+```
+
+
+
+## Training
+
+```
+python3 train.py --train_data PATH_TO_DATASET/EveLidAngle/training --test_data PATH_TO_DATASET/EveLidAngle/testing
+```
+
+
+
+## Testing
+
+For example:
+
+```
+python3 metrics.py output.txt
 ```
 
 
