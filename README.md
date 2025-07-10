@@ -23,7 +23,7 @@ Dataset ***EveLidAngle*** can be found [here](#dataset).
 3. [Citation](#citation)
 4. [Installation](#installation)
 5. [Training](#training)
-6. [Testing](#testing)
+6. [Evaluation](#evaluation)
 7. [Acknowledgment](#acknowledgment)
 
 
@@ -111,7 +111,7 @@ python3 train.py --train_data PATH_TO_DATASET/EveLidAngle/training --test_data P
 
 
 
-## Testing
+## Evaluation
 
 
 
