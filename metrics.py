@@ -33,7 +33,8 @@ def main():
     
     print(f"Calculate Metrics: RMSE, MAE, EVA; from {args.file_name}")
     
-    file_path = os.path.join("./outputs", args.file_name)
+    
+    file_path = os.path.join("./", args.file_name)
     
     # Main fuction to compute and display the results
     gt, pred = read_file(file_path)

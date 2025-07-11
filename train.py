@@ -16,53 +16,6 @@ import logging
 import random
 import numpy as np
 
-
-def validate(model, criterion, val_dataloader):
-    model.eval()
-    
-    total_loss = 0.0
-    
-    with torch.no_grad():
-        
-        for batch in val_dataloader:
-            event_frames = batch.get('event_frames', None)
-            
-            lidar_depth_frames = batch.get('lidar_depth_frames', None)
-            steering_angle = batch.get('steering_angle', None)
-            
-            if event_frames is None:
-                print("event_frames are missing in the batch.")
-            
-            if lidar_depth_frames is None:
-                print("lidar_depth_frames are missing in the batch.")
-            if steering_angle is None:
-                print("steering_angle are missing in the batch.")
-            
-            # Transfer data to GPU
-            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-            event_frames = event_frames.to(device)
-            
-            lidar_depth_frames = lidar_depth_frames.to(device)
-            steering_angle = steering_angle.to(device)
-            
-            
-            ### KL Loss ###
-            output, _, _ = model(event_frames, lidar_depth_frames)
-            
-            
-            steering_angle = steering_angle.unsqueeze(1)
-            
-            
-            loss = criterion(output, steering_angle)
-            
-            total_loss += loss.item()	# Accumulate MSE loss
-    
-    avg_mse_loss = total_loss / len(val_dataloader)	# Average MSE over the validation set
-    rmse_loss = avg_mse_loss ** 0.5	# Convert MSE to RMSE
-    return rmse_loss
-    
-
-
 def validate_save(model, criterion, val_dataloader, epoch, experiment_dir):
     model.eval()
     
@@ -131,8 +84,6 @@ def train(args):
     
     logging.basicConfig(filename=log_file_path, level=logging.INFO)
     
-    
-    
     # Path to the root directories containing subfolders for training and validation
     train_root_dir = args.train_data
     val_root_dir = args.test_data
@@ -141,12 +92,8 @@ def train(args):
     # Define any transformations if necessary
     transform = transforms.Compose([
         
-        
-        
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
-    
-    
     
     # Initialize datasets and dataloaders
     
@@ -162,8 +109,6 @@ def train(args):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = EveLidNet().to(device)
     criterion = nn.MSELoss()
-    
-    
     
     optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     
@@ -193,8 +138,6 @@ def train(args):
         
         
         for batch in train_dataloader:
-            
-            
             
             event_frames = batch.get('event_frames', None)
             
@@ -230,8 +173,6 @@ def train(args):
             
             # Compute loss
             loss = criterion(output, steering_angle)
-            
-            
             
             
             ### KL Loss ###
@@ -285,7 +226,6 @@ def train(args):
         print(f"Saved last model at epoch {epoch}")
     
     
-
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Train a steering angle prediction model based on event frames and lidar depth frames.')
@@ -308,8 +248,6 @@ if __name__ == "__main__":
     parser.add_argument('--flip_prob', type=float, default=0.3, help='Probability of applying horizontazl flip')
     
     args = parser.parse_args()
-    
-    
     
     train(args)
 

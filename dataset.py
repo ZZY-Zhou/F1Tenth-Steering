@@ -161,10 +161,6 @@ class EveLidSteeringAngleDataset(Dataset):
             
             return {'event_frames': event_frame, 'lidar_depth_frames': lidar_depth_frames, 'steering_angle': torch.tensor(steering_angle, dtype=torch.float32)}
             
-    
-
-
-
 
 def normalize_depth_map(depth, mean, std):
 
